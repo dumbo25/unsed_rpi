@@ -8,22 +8,22 @@ echo size before removal
 df -h
 
 echo packages to remove:
-sudo apt-get remove --purge libreoffice* -y
-sudo apt-get remove --purge wolfram-engine -y
-sudo apt-get remove -—purge chromium-browser -y
-sudo apt-get remove --purge scratch2 -y
-sudo apt-get remove --purge minecraft-pi  -y
-sudo apt-get remove --purge sonic-pi  -y
-sudo apt-get remove --purge dillo -y
-sudo apt-get remove --purge gpicview -y
-sudo apt-get remove --purge penguinspuzzle -y
-sudo apt-get remove --purge oracle-java8-jdk -y
-sudo apt-get remove --purge openjdk-7-jre -y
-sudo apt-get remove --purge oracle-java7-jdk -y 
-sudo apt-get remove --purge openjdk-8-jre -y
+sudo apt remove --purge libreoffice* -y
+sudo apt remove --purge wolfram-engine -y
+sudo apt remove -—purge chromium-browser -y
+sudo apt remove --purge scratch2 -y
+sudo apt remove --purge minecraft-pi  -y
+sudo apt remove --purge sonic-pi  -y
+sudo apt remove --purge dillo -y
+sudo apt remove --purge gpicview -y
+sudo apt remove --purge penguinspuzzle -y
+sudo apt remove --purge oracle-java8-jdk -y
+sudo apt remove --purge openjdk-7-jre -y
+sudo apt remove --purge oracle-java7-jdk -y 
+sudo apt remove --purge openjdk-8-jre -y
 
-sudo apt-get clean
-sudo apt-get autoremove -y
+sudo apt clean
+sudo apt autoremove -y
 
 echo size after removing packages
 df -h
