@@ -12,7 +12,7 @@ echo "set up uncomplicated firwall (ufw)"
 # sudo apt-get install ufw -y
 
 # enable ufw
-# sudo ufw enable
+sudo ufw enable
 
 # configure ufw
 # deny all incoming requests and allow all outgoing requests
@@ -35,4 +35,3 @@ sudo ufw deny https
 
 # ICMP/ping doesn't use a port. However, this is required to allow pings form within the LAN
 sudo ufw allow from 192.168.1.0/24 to any port 7
-
