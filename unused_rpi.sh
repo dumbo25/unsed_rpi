@@ -3,11 +3,18 @@
 # list of all packages by size (be sure to check quotes are correct)
 # dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -nr
 
-echo remove unused raspbian packages
-echo size before removal 
+Bold=$(tput bold)
+Normal=$(tput sgr0)
+Red=$(tput setaf 1)
+Green=$(tput setaf 2)
+Blue=$(tput setaf 4)
+Black=$(tput sgr0)
+
+echo -e "\n ${Bold}${Blue} Remove unused packages ${Black}${Normal}"
+echo -e " ${Bold}${Blue}   disk space used before removal ${Black}${Normal}"
 df -h
 
-echo packages to remove:
+echo -e "\n ${Bold}${Blue}   packages to remove (ignore warnings) ${Black}${Normal}"
 sudo apt remove --purge libreoffice* -y
 sudo apt remove --purge wolfram-engine -y
 sudo apt remove -—purge chromium-browser -y
@@ -27,5 +34,5 @@ sudo apt-get remove --purge x11-* -y
 sudo apt autoremove -y
 sudo apt clean
 
-echo size after removing packages
+echo -e "\n ${Bold}${Blue}   disk space used after removal ${Black}${Normal}"
 df -h
