@@ -9,10 +9,11 @@ Removing these pacakges isn't really necessary. They do save microSD Card space.
 Runs a bunch of commands to setup a Raspberry Pi
 
 Download the script 
-'''
+```
 wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/unused_rpi.sh"
 wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/unused_rpi.cfg"
-'''
+```
+
 Edit the .cfg to include your values (hostname, your wifi password)
 
 sudo chmod +x rpi_setup.sh
@@ -23,7 +24,9 @@ sudo bash rpi_setup.sh
 Remove packages I don't use.
 
 Download the script 
+```
 wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/unused_rpi.sh"
+```
 
 sudo chmod +x unused_rpi.sh
 
@@ -33,7 +36,9 @@ sudo bash unused_rpi.sh
 Remove desktop packages
 
 Download the script 
+```
 wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/desktop.sh"
+```
 
 sudo chmod +x desktop.sh
 
