@@ -5,7 +5,7 @@ raspi-config must be run before these scripts.
 
 Removing these pacakges isn't really necessary. They do save microSD Card space. And if any of the packages start services, then these services will not run, which could save some CPU processing time.
 
-A more detailed description of setting up the [Raspberry Pi OS is in this link](https://sites.google.com/site/cartwrightraspberrypiprojects/home/steps/setup-raspberry-pi-3-with-raspbian)
+A more detailed description of setting up a Raspberry Pi and the [Raspberry Pi OS is in this link](https://sites.google.com/site/cartwrightraspberrypiprojects/home/steps/setup-raspberry-pi-3-with-raspbian)
 
 ## rpi_setup.sh
 Runs a bunch of commands to setup a Raspberry Pi, including the two scripts below.
