@@ -30,7 +30,8 @@ sudo apt remove --purge gtk* -y
 sudo apt remove --purge hicolor-icon-theme* -y
 sudo apt remove --purge lx* -y
 sudo apt remove --purge mesa* -y
-sudo apt remove --purge vlc* -y
+# vlc can be used by camera apps in headless mode. So, don't remove
+# sudo apt remove --purge vlc* -y
 
 sudo apt autoremove -y
 sudo apt clean
