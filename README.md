@@ -1,5 +1,5 @@
 # Overview
-This repository is a collection of scripts to aid in setting up a Raspberry Pi using Raspberry Pi OS (or raspbian) to run headless.
+This repository is a collection of bash scripts to aid in setting up a Raspberry Pi using Raspberry Pi OS (or raspbian) to run headless. In the past, I used [diet-pi](https://dietpi.com/) or Raspberry Pi OS Lite. Overtime, I realized if I had a problem there are more web resources for Raspberry Pi OS and I switched. Also, I can control what to remove and what to keep.
 
 raspi-config must be run before these scripts.
 
