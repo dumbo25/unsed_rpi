@@ -1,6 +1,8 @@
 # Overview
 This repository is a collection of scripts to aid in setting up a Raspberry Pi using Raspberry Pi OS (or raspbian) to run headless.
 
+raspi-config must be run before these scripts.
+
 Removing these pacakges isn't really necessary. They do save microSD Card space. And if any of the packages start services, then these services will not run, which could save some CPU processing time.
 
 ## unsed_rpi.sh
