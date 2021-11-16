@@ -9,9 +9,10 @@ Removing these pacakges isn't really necessary. They do save microSD Card space.
 Runs a bunch of commands to setup a Raspberry Pi
 
 Download the script 
+'''
 wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/unused_rpi.sh"
 wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/unused_rpi.cfg"
-
+'''
 Edit the .cfg to include your values (hostname, your wifi password)
 
 sudo chmod +x rpi_setup.sh
