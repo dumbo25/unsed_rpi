@@ -30,6 +30,7 @@ sudo apt remove --purge gtk* -y
 sudo apt remove --purge hicolor-icon-theme* -y
 sudo apt remove --purge lx* -y
 sudo apt remove --purge mesa* -y
+sudo apt remove --purge vlc* -y
 
 sudo apt autoremove -y
 sudo apt clean
