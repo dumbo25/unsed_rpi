@@ -21,7 +21,8 @@ sudo apt remove --purge oracle-java8-jdk -y
 sudo apt remove --purge openjdk-7-jre -y
 sudo apt remove --purge oracle-java7-jdk -y 
 sudo apt remove --purge openjdk-8-jre -y
-sudo apt remove --purge libx11-.*
+sudo apt remove --purge libx11-.* -y
+sudo apt-get remove --purge x11-* -y
 
 sudo apt autoremove -y
 sudo apt clean
