@@ -11,10 +11,10 @@ Blue=$(tput setaf 4)
 Black=$(tput sgr0)
 
 echo -e "\n ${Bold}${Blue} Remove desktop packages ${Black}${Normal}"
-echo -e "\n ${Bold}${Blue}   disk space used before removal ${Black}${Normal}"
+echo " ${Bold}${Blue}   disk space used before removal ${Black}${Normal}"
 df -h
 
-echo packages to remove:
+echo -e "\n ${Bold}${Blue}   packages to remove (ignore warnings) ${Black}${Normal}"
 sudo apt remove --purge libreoffice* -y
 sudo apt remove -—purge chromium* -y
 sudo apt remove --purge libx11-.* -y
