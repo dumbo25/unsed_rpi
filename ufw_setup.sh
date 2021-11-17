@@ -35,4 +35,6 @@ sudo ufw deny https
 # ICMP/ping doesn't use a port. However, this is required to allow pings form within the LAN
 sudo ufw allow from 192.168.1.0/24 to any port 7
 
+sudo ufw status
+
 echo -e "\n ${Bold}${Blue} Done with uncomplicated firewall (ufw) ${Black}${Normal}"
