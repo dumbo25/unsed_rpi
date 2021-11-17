@@ -1,14 +1,27 @@
-mod_evasive is a module for Apache, which provides evasive action in the event of a Denial of Service attack or brute force attack. Install mod_evasive by running the command:
+#!/bin/bash
+# script to install and setup mod_evasive
+#
+# mod_evasive is a module for Apache, which provides evasive action in the event
+# of a Denial of Service attack or brute force attack. Install mod_evasive by 
+# running the command:
 
-$ sudo apt-get install libapache2-mod-evasive -y
+Bold=$(tput bold)
+Normal=$(tput sgr0)
+Red=$(tput setaf 1)
+Green=$(tput setaf 2)
+Blue=$(tput setaf 4)
+Black=$(tput sgr0)
 
-Create a log directory:
+echo -e "\n ${Bold}${Blue} Remove unused packages ${Black}${Normal}"
 
-$ sudo mkdir /var/log/mod_evasive
+sudo apt-get install libapache2-mod-evasive -y
 
-$ sudo chown www-data:www-data /var/log/mod_evasive
+# Create a log directory:
+sudo mkdir /var/log/mod_evasive
+sudo chown www-data:www-data /var/log/mod_evasive
 
-Edit:
+echo "DEBUG: neeed to change edit to sed, awk, cat or get"
+exit
 
 $ sudo nano /etc/apache2/mods-available/evasive.conf
 
