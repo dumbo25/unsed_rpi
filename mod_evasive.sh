@@ -24,12 +24,11 @@ wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/evasive.conf"
 
 echo "DEBUG: neeed to change edit to sed"
 exit
-$ sudo nano /etc/apache2/mods-available/evasive.conf
-change:
-    #DOSEmailNotify      you@yourdomain.com
-to:
-    DOSEmailNotify      you@gmail.com
-    
+# $ sudo nano /etc/apache2/mods-available/evasive.conf
+# change:
+#     #DOSEmailNotify      you@yourdomain.com
+# to:
+#     DOSEmailNotify      you@gmail.com 
 echo "DEBUG: neeed to change above"
 
 sudo cp evasive.conf /etc/apache2/mods-available/evasive.conf
