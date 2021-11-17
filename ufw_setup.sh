@@ -1,15 +1,14 @@
 #!/bin/bash
 # sript to setup uncomplicated firewall
 
+Bold=$(tput bold)
+Normal=$(tput sgr0)
+Red=$(tput setaf 1)
+Green=$(tput setaf 2)
+Blue=$(tput setaf 4)
+Black=$(tput sgr0)
+
 echo "set up uncomplicated firwall (ufw)"
-
-# update and uphrade packages
-# sudo apt update -y
-# sudo apt upgrade -y
-# sudo apt autoremove -y
-
-# install ufw
-# sudo apt-get install ufw -y
 
 # enable ufw
 sudo ufw enable -y
