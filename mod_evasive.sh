@@ -12,7 +12,7 @@ Green=$(tput setaf 2)
 Blue=$(tput setaf 4)
 Black=$(tput sgr0)
 
-echo -e "\n ${Bold}${Blue} Remove unused packages ${Black}${Normal}"
+echo -e "\n ${Bold}${Blue} Install and configure mod_evasive to lessen DOS attacks ${Black}${Normal}"
 
 sudo apt-get install libapache2-mod-evasive -y
 
@@ -20,26 +20,20 @@ sudo apt-get install libapache2-mod-evasive -y
 sudo mkdir /var/log/mod_evasive
 sudo chown www-data:www-data /var/log/mod_evasive
 
-echo "DEBUG: neeed to change edit to sed, awk, cat or get"
+wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/evasive.conf"
+
+echo "DEBUG: neeed to change edit to sed"
 exit
-/etc/apache2/mods-available/evasive.conf
-wget ""
 $ sudo nano /etc/apache2/mods-available/evasive.conf
+change:
+    #DOSEmailNotify      you@yourdomain.com
+to:
+    DOSEmailNotify      you@gmail.com
+    
+echo "DEBUG: neeed to change above"
 
-and 
+sudo cp evasive.conf /etc/apache2/mods-available/evasive.conf
 
-uncomment all lines except DOSSystemCommand. 
+sudo service apache2 restart
 
-change DOSEmailNotify to your email address.
-
-Save and exit the editor
-
-Restart apache2
-
-$ sudo service apache2 restart
-
-If failed, then install Apache2 using:
-
-$ sudo apt install apache2 libapache2-mod-wsgi -y
-
-$ sudo service apache2 restart
+echo -e "\n ${Bold}${Blue} mod_evasive is done ${Black}${Normal}"
