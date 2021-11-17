@@ -22,7 +22,8 @@ sudo chown www-data:www-data /var/log/mod_evasive
 
 echo "DEBUG: neeed to change edit to sed, awk, cat or get"
 exit
-
+/etc/apache2/mods-available/evasive.conf
+wget ""
 $ sudo nano /etc/apache2/mods-available/evasive.conf
 
 and 
