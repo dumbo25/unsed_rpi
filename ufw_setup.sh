@@ -8,7 +8,7 @@ Green=$(tput setaf 2)
 Blue=$(tput setaf 4)
 Black=$(tput sgr0)
 
-echo "set up uncomplicated firwall (ufw)"
+echo -e "\n ${Bold}${Blue} Set up uncomplicated firewall (ufw) ${Black}${Normal}"
 
 # enable ufw
 sudo ufw enable -y
@@ -34,3 +34,5 @@ sudo ufw deny https
 
 # ICMP/ping doesn't use a port. However, this is required to allow pings form within the LAN
 sudo ufw allow from 192.168.1.0/24 to any port 7
+
+echo -e "\n ${Bold}${Blue} Done with uncomplicated firewall (ufw) ${Black}${Normal}"
