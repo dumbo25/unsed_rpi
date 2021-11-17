@@ -12,7 +12,7 @@ echo "set up uncomplicated firwall (ufw)"
 # sudo apt-get install ufw -y
 
 # enable ufw
-sudo ufw enable
+sudo ufw enable -y
 
 # configure ufw
 # deny all incoming requests and allow all outgoing requests
