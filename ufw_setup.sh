@@ -15,14 +15,11 @@ yes | sudo ufw enable
 
 # configure ufw
 # deny all incoming requests and allow all outgoing requests
-echo "DEBUG: before deny incoming"
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 
 #  ssh uses port 22
-echo "DEBUG: before ufw limit"
 sudo ufw limit ssh 
-echo "DEBUG: before ufw allow"
 sudo ufw allow from 192.168.1.0/24 to any port 22
 # the following line disables ssh
 # sudo ufw deny ssh
