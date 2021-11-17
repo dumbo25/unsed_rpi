@@ -11,7 +11,7 @@ Black=$(tput sgr0)
 echo -e "\n ${Bold}${Blue} Set up uncomplicated firewall (ufw) ${Black}${Normal}"
 
 # enable ufw
-sudo ufw enable 
+yes | sudo ufw enable 
 
 # configure ufw
 # deny all incoming requests and allow all outgoing requests
