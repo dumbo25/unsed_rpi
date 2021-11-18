@@ -26,7 +26,8 @@ rm evasive.conf
 wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/evasive.conf"
 
 echo "DEBUG: neeed to change edit to sed"
-sed -i 's/#DOSEmailNotify.*/DOSEmailNotify $YourEmail/g' evasive.conf
+a="s/#DOSEmailNotify.*/DOSEmailNotify $YourEmail/g"
+sed -i '$a' evasive.conf
 exit
 echo "DEBUG: neeed to change above"
 
