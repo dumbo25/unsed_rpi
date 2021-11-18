@@ -14,21 +14,20 @@ Black=$(tput sgr0)
 
 echo -e "\n ${Bold}${Blue} Install and configure mod_evasive to lessen DOS attacks ${Black}${Normal}"
 
+. rpi_setup.cfg
+
 sudo apt-get install libapache2-mod-evasive -y
 
 # Create a log directory:
 sudo mkdir /var/log/mod_evasive
 sudo chown www-data:www-data /var/log/mod_evasive
 
+rm evasive.conf
 wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/evasive.conf"
 
 echo "DEBUG: neeed to change edit to sed"
+sed -i 's/#DOSEmailNotify.*/DOSEmailNotify $YourEmail/g' evasive.conf
 exit
-# $ sudo nano /etc/apache2/mods-available/evasive.conf
-# change:
-#     #DOSEmailNotify      you@yourdomain.com
-# to:
-#     DOSEmailNotify      you@gmail.com 
 echo "DEBUG: neeed to change above"
 
 sudo cp evasive.conf /etc/apache2/mods-available/evasive.conf
