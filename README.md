@@ -3,12 +3,16 @@ This repository is a collection of bash scripts to aid in setting up a Raspberry
 
 raspi-config must be run before these scripts.
 
-Removing these pacakges isn't really necessary. They do save microSD Card space. And if any of the packages start services, then these services will not run, which could save some CPU processing time.
+Some of the scripts remove pacakges, which isn't really necessary. Removing the packages does save microSD Card space. And if any of the packages start services, then these services will not run, which could save some CPU processing time. This is more valuable on an RPi0 and of little value on an RPi4.
+
+Other scripts set up harden the RPi from common security hacks. 
+
+One script adds rpi_monitor.
 
 A more detailed description of setting up a Raspberry Pi and the [Raspberry Pi OS is in this link](https://sites.google.com/site/cartwrightraspberrypiprojects/home/steps/setup-raspberry-pi-3-with-raspbian)
 
 ## rpi_setup.sh
-Runs a bunch of commands to setup a Raspberry Pi, including the two scripts below.
+This is the master script and runs the other scripts.
 
 Download the script 
 ```
@@ -16,32 +20,9 @@ wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/unused_rpi.sh"
 wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/unused_rpi.cfg"
 ```
 
-Edit the .cfg to include your values (hostname, your wifi password)
+Edit the .cfg to include your values (hostname, your wifi password, and so on)
 
 sudo chmod +x rpi_setup.sh
 
 sudo bash rpi_setup.sh
 
-## unsed_rpi.sh
-Remove packages I don't use.
-
-Download the script 
-```
-wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/unused_rpi.sh"
-```
-
-sudo chmod +x unused_rpi.sh
-
-sudo bash unused_rpi.sh
-
-## desktop.sh
-Remove desktop packages
-
-Download the script 
-```
-wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/desktop.sh"
-```
-
-sudo chmod +x desktop.sh
-
-sudo bash desktop.sh
