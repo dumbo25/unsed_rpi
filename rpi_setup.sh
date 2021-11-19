@@ -25,10 +25,15 @@
 # To Do List:
 #   a) follow my raspberry project setup instructions and automate all of them
 #   ********************* STOPPPED HERE ************************
-#      a.1) imrpove security
+#      a.8) Install rootkit Checker
+#      a.9) Disable bad versions of SSL and TLS
 #   b) script may need to run multiple timess. Add file to track where setup
 #      stopped
 #   c) move functions to an import file
+#   d) edit the following pagess to include this script
+#      d1) https://sites.google.com/site/cartwrightraspberrypiprojects/home/steps/improve-rasberry-pi-security
+#      d2) https://sites.google.com/site/cartwrightraspberrypiprojects/home/steps/setup-raspberry-pi-zero-w-or-wh
+#      d3) https://sites.google.com/site/cartwrightraspberrypiprojects/home/steps/setup-raspberry-pi-3-with-raspbian
 #
 #
 #   w) test from scratch that it works
@@ -53,7 +58,7 @@
 ############################# <- 80 Characters -> ##############################
 
 ############################### Global Variables ###############################
-Version="01.01"
+Version="01.02"
 
 RebootRequired=false
 StateFilename=".rpi_setup.state"
@@ -66,6 +71,13 @@ OptionRemoveCamera=true
 OptionClear=true
 OptionHeadless=true
 OptionUpdate=true
+OptionUFW=true
+OptionFail2Ban=true
+OptionEvasive=true
+OptionIPSpoofing=true
+OptionSysctl=true
+OptionLogwatch=true
+OptionRpiMonitor=true
 
 Bold=$(tput bold)
 Normal=$(tput sgr0)
@@ -187,11 +199,14 @@ fi
 # Process command line options
 # All options must be listed in order following the : between the quotes on the
 # following line:
-while getopts ":6cChHuv" option
+while getopts ":6bcCefhHilmsuv" option
 do
     case $option in
         6) # do not disable IPv6
             OptionDisableIPv6=False
+            ;;
+        b) # disable install and setup of fail2ban
+            OptionFail2Ban=false
             ;;
         c) # disable clear after update and upgrade
             OptionClear=false
@@ -199,11 +214,29 @@ do
         C) # keep camers
             OptionRemoveCamera=false
             ;;
+        e) # don't install mod_evasive
+            OptionEvasive=false
+            ;;
+        f) # do not install uncomplicated firewall
+            OptionUFW=false
+            ;;
         h) # display Help
             echoHelp
             exit;;
         H) # do not remove packages not needed in headless operation
             OptionHeadless=false
+            ;;
+        i) # do not prevent IP Spoofing
+            OptionIPSpoofing=false
+            ;;
+        l) # do not install and confiure logwatch
+            OptionLogwatch=false
+            ;;
+        m) # do not install and confiure rpi_monitor
+            OptionRpiMonitor=false
+            ;;
+        s) # do not harden sysctl settings
+            OptionSysctl=false
             ;;
         u) # skip update and upgrade steps
             OptionUpdate=false
@@ -257,6 +290,7 @@ then
     sudo apt upgrade -y
     echo -e "\n  ${Bold}${Blue}removing trash ${Black}${Normal}"
     sudo apt autoremove -y
+    sudo apt clean
 
     # the above generates a lot of things that may not be relevant to the install of
     # this application. So, clear the screen and then put Starting message here.
@@ -360,10 +394,174 @@ else
     echo -e " ${Bold}${Blue}   Skipping camera removal [option] ${Black}${Normal}"
 fi
 
+# Install uncomplicated firewall
+if [ "$OptionUFW" = true ]
+then
+    checkVar "StateUFW"
+    if [ $Result = true ]
+    then
+        echo -e "\n ${Bold}${Blue}   Install uncomplicated firewall ${Black}${Normal}"
+        sudo apt install ufw -y
+
+        rm ufw_setup.sh
+        wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/ufw_setup.sh"
+        bash ufw_setup.sh
+
+        writeToSetup "StateUFW" "true"
+        RebootRequired=true
+    else
+        echo -e " ${Bold}${Blue}   Skipping uncomplicated firewall [state] ${Black}${Normal}"
+    fi
+else
+    echo -e " ${Bold}${Blue}   Skipping uncomplicated firewall [option] ${Black}${Normal}"
+fi
+
+# Install and configure fail2ban
+if [ "$OptionFail2Ban" = true ]
+then
+    checkVar "StateFail2Ban"
+    if [ $Result = true ]
+    then
+        echo -e "\n ${Bold}${Blue}   Install fail2ban ${Black}${Normal}"
+        sudo apt install ufw -y
+
+        rm fail2ban.sh
+        wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/fail2ban.sh"
+        bash fail2ban.sh
+
+        writeToSetup "StateFail2Ban" "true"
+        RebootRequired=true
+    else
+        echo -e " ${Bold}${Blue}   Skipping fail2ban [state] ${Black}${Normal}"
+    fi
+else
+    echo -e " ${Bold}${Blue}   Skipping fail2ban [option] ${Black}${Normal}"
+fi
+
+# Install and configure mod_evasive
+if [ "$OptionEvasive" = true ]
+then
+    checkVar "StateEvasive"
+    if [ $Result = true ]
+    then
+        echo -e "\n ${Bold}${Blue}   Install mod_evasive ${Black}${Normal}"
+        sudo apt install ufw -y
+
+        rm mod_evasive.sh
+        wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/mod_evasive.sh"
+        bash mod_evasive.sh
+
+        writeToSetup "StateEvasive" "true"
+        RebootRequired=true
+    else
+        echo -e " ${Bold}${Blue}   Skipping mod_evasive [state] ${Black}${Normal}"
+    fi
+else
+    echo -e " ${Bold}${Blue}   Skipping mod_evasive [option] ${Black}${Normal}"
+fi
+
+# Prevent IP Spoofing
+# Install and configure mod_evasive
+if [ "$OptionIPSpoofing" = true ]
+then
+    checkVar "StateIPSpoofing"
+    if [ $Result = true ]
+    then
+        echo -e "\n ${Bold}${Blue}   Prevent IP Spoofing ${Black}${Normal}"
+        echo "order bind,hosts" >> /etc/host.conf
+
+        writeToSetup "StateIPSpoofing" "true"
+    else
+        echo -e " ${Bold}${Blue}   Skipping IP Spoofing [state] ${Black}${Normal}"
+    fi
+else
+    echo -e " ${Bold}${Blue}   Skipping IP Spoofing [option] ${Black}${Normal}"
+fi
+
+
+# Harden sysctl configuration settings
+if [ "$OptionSysctl" = true ]
+then
+    checkVar "StateSysctl"
+    if [ $Result = true ]
+    then
+        echo -e "\n ${Bold}${Blue}   Harden sysctl settings ${Black}${Normal}"
+        sudo apt install ufw -y
+
+        rm sysctl.conf
+        wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/sysctl.conf"
+        rm /etc/sysctl.conf
+        cp sysctl.conf /etc/sysctl.conf
+
+        # Load sysctl changes
+        sysctl -p
+
+        writeToSetup "StateSysctl" "true"
+        RebootRequired=true
+    else
+        echo -e " ${Bold}${Blue}   Skipping harden sysctl settings [state] ${Black}${Normal}"
+    fi
+else
+    echo -e " ${Bold}${Blue}   Skipping harden sysctl settings [option] ${Black}${Normal}"
+fi
+
+
+# Install and configure logwatch
+if [ "$OptionLogwatch" = true ]
+then
+    checkVar "StateLogwatch"
+    if [ $Result = true ]
+    then
+        echo -e "\n ${Bold}${Blue}   Install and configure logwatch ${Black}${Normal}"
+        apt install logwatch -y
+
+        # Set it to run weekly
+        rm /etc/cron.weekly/00logwatch
+        cp /etc/cron.daily/00logwatch /etc/cron.weekly/
+
+        # using , instead of / as separator in sed
+        sed -i 's,/usr/sbin/logwatch.*,/usr/sbin/logwatch --output mail --range "between -7 days and -1 days",g' /etc/cron.weekly/00logwatch
+
+        writeToSetup "StateLogwatch" "true"
+        RebootRequired=true
+    else
+        echo -e " ${Bold}${Blue}   Skipping logwatch installation [state] ${Black}${Normal}"
+    fi
+else
+    echo -e " ${Bold}${Blue}   Skipping logwatch installation [option] ${Black}${Normal}"
+fi
+
+
+
+
+
+
+# Install and configure rpi_monitor
+if [ "$OptionRpiMonitor" = true ]
+then
+    checkVar "StateRpiMonitor"
+    if [ $Result = true ]
+    then
+        echo -e "\n ${Bold}${Blue}   Install and configure rpi_monitor ${Black}${Normal}"
+
+        rm mod_evasive.sh
+        wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/rpi_monitor.sh"
+        bash rpi_monitor.sh
+
+        writeToSetup "StateRpiMonitor" "true"
+        RebootRequired=true
+    else
+        echo -e " ${Bold}${Blue}   Skipping rpi_monitor installation [state] ${Black}${Normal}"
+    fi
+else
+    echo -e " ${Bold}${Blue}   Skipping rpi_monitor installation [option] ${Black}${Normal}"
+fi
+
+
 if [ $RebootRequired = true ]
 then
     echoExitingScript "After reboot, please rerun this script"
 else
     writeToSetup "StateNotSuccess" "true"
-    echoExitingScript
+    echoExitingScript "Success !"
 fi
