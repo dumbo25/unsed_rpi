@@ -20,16 +20,10 @@ echo -e "\n ${Bold}${Blue} Install and configure tools to find rootkits ${Black}
 
 apt install rkhunter chkrootkit -y
 
-Edit rkhunter's config file:
-
-$ sudo nano /etc/default/rkhunter
-
-and change these lines to be:
-
-CRON_DAILY_RUN="true"
-
-CRON_DB_UPDATE="true"
-
+rm rkhunter
+wget https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/rkhunter
+rm /etc/default/rkhunter
+cp rkhunter /etc/default/rkhunter
 
 Edit chrootkit's config file:
 
