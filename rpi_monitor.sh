@@ -13,6 +13,8 @@ Black=$(tput sgr0)
 
 echo -e "\n ${Bold}${Blue} Install and configure rpi_monitor ${Black}${Normal}"
 
+sudo ufw allow from 192.168.1.0/24 to any port 8888
+
 apt install dirmngr -y
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 2C0D3C0F
 wget http://goo.gl/vewCLL -O /etc/apt/sources.list.d/rpimonitor.list
@@ -22,4 +24,4 @@ apt install rpimonitor -y
 
 /etc/init.d/rpimonitor update
 
-echo -e "\n ${Bold}${Blue} rpi_monitor is done ${Black}${Normal}"
+echo -e "\n ${Bold}${Blue} rpi_monitor install script is done ${Black}${Normal}"
