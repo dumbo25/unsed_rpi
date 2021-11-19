@@ -25,23 +25,15 @@ wget https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/rkhunter
 rm /etc/default/rkhunter
 cp rkhunter /etc/default/rkhunter
 
-Edit chrootkit's config file:
+rm chkrootkit.conf
+wget https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/chkrootkit.conf
+rm /etc/chkrootkit.conf
+cp chkrootkit.conf /etc/chkrootkit.conf
 
-$ sudo nano /etc/chkrootkit.conf
-
-and change these lines to be:
-
-RUN_DAILY="true"
-
-RUN_DAILY_OPTS=""
-
-Run the checkers weekly:
-
-$ sudo mv /etc/cron.weekly/rkhunter /etc/cron.weekly/rkhunter_update
-
-$ sudo mv /etc/cron.daily/rkhunter /etc/cron.weekly/rkhunter_run
-
-$ sudo mv /etc/cron.daily/chkrootkit /etc/cron.weekly/
+# Run the checkers weekly:
+mv /etc/cron.weekly/rkhunter /etc/cron.weekly/rkhunter_update
+mv /etc/cron.daily/rkhunter /etc/cron.weekly/rkhunter_run
+mv /etc/cron.daily/chkrootkit /etc/cron.weekly/
 
 echo -e "\n ${Bold}${Blue} rootkit installation is done ${Black}${Normal}"
 
