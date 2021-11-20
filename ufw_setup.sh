@@ -19,7 +19,10 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 
 #  ssh uses port 22
-sudo ufw limit ssh 
+# The "limit ssh" rule is good to have. It limits ssh to one connection as
+# a time. However, I use three terminal windows using ssh when developing
+# a new project. So, I am commenting this out
+# sudo ufw limit ssh 
 sudo ufw allow from 192.168.1.0/24 to any port 22
 # the following line disables ssh
 # sudo ufw deny ssh
