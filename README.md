@@ -3,7 +3,7 @@ This repository is a collection of bash scripts to aid in setting up a Raspberry
 
 raspi-config must be run before rpi_setup.sh
 
-Some of the scripts remove packages, which isn't necessary. Removing the packages does save microSD Card space. I typically run rPi headless. So, I don't need or use the desktop, chrome and so on. 
+Some of the scripts remove packages, which isn't necessary. Removing the packages does save microSD Card space (3.0GB used after update and upgrade, and 1.8GB after pacakges removed. So, more than a 33% redeuction in microSD Card space used). I typically run rPi headless. So, I don't need or use the desktop, chrome and so on. 
 
 Removing the packages also prevents any related services from running. A service that is unused and running wastes CPU. This is more valuable on an RPi0 and of little value on an RPi4. But, I do it anyway.
 
