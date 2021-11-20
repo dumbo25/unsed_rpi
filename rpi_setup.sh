@@ -1,3 +1,4 @@
+
 #!/bin/bash
 # bash script to setup Raspberry Pi
 #
@@ -23,23 +24,9 @@
 # items.
 #
 # To Do List:
-#   a) follow my raspberry project setup instructions and automate all of them
-#   ********************* STOPPPED HERE ************************
-#      a.8) Install rootkit Checker
-#      a.9) Disable bad versions of SSL and TLS
-#   b) script may need to run multiple timess. Add file to track where setup
-#      stopped
-#   c) move functions to an import file
-#   d) edit the following pagess to include this script
-#      d1) https://sites.google.com/site/cartwrightraspberrypiprojects/home/steps/improve-rasberry-pi-security
-#      d2) https://sites.google.com/site/cartwrightraspberrypiprojects/home/steps/setup-raspberry-pi-zero-w-or-wh
-#      d3) https://sites.google.com/site/cartwrightraspberrypiprojects/home/steps/setup-raspberry-pi-3-with-raspbian
-#
 #
 #   w) test from scratch that it works
 #   x) run shell check
-#   y) add rpi_setuprpi_setup.sh and rpi_setup.cfg to github
-#   z) add to raspberry pi projects
 #
 # Do later or not at all:
 #
@@ -78,6 +65,7 @@ OptionIPSpoofing=true
 OptionSysctl=true
 OptionLogwatch=true
 OptionRpiMonitor=true
+OptionRootkit=true
 
 Bold=$(tput bold)
 Normal=$(tput sgr0)
@@ -199,7 +187,7 @@ fi
 # Process command line options
 # All options must be listed in order following the : between the quotes on the
 # following line:
-while getopts ":6bcCefhHilmsuv" option
+while getopts ":6bcCefhHilmrsuv" option
 do
     case $option in
         6) # do not disable IPv6
@@ -234,6 +222,9 @@ do
             ;;
         m) # do not install and confiure rpi_monitor
             OptionRpiMonitor=false
+            ;;
+        r) $ do not install tools to find rootkits
+            OptionRootkit=false
             ;;
         s) # do not harden sysctl settings
             OptionSysctl=false
@@ -531,6 +522,26 @@ else
     echo -e " ${Bold}${Blue}   Skipping logwatch installation [option] ${Black}${Normal}"
 fi
 
+# Install and configure rootkit tools
+if [ "$OptionRootkit" = true ]
+then
+    checkVar "StateRootkit"
+    if [ $Result = true ]
+    then
+        echo -e "\n ${Bold}${Blue}   Install and configure rootkit tools ${Black}${Normal}"
+
+        rm rootkit.sh
+        wget "https://raw.githubusercontent.com/dumbo25/unsed_rpi/main/rootkit.sh"
+        bash rootkit.sh
+
+        writeToSetup "StateRootkit" "true"
+        RebootRequired=true
+    else
+        echo -e " ${Bold}${Blue}   Skipping rootkit tools installation [state] ${Black}${Normal}"
+    fi
+else
+    echo -e " ${Bold}${Blue}   Skipping rootkit tools installation [option] ${Black}${Normal}"
+fi
 
 
 
