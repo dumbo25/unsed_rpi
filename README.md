@@ -3,11 +3,13 @@ This repository is a collection of bash scripts to aid in setting up a Raspberry
 
 raspi-config must be run before rpi_setup.sh
 
-Some of the scripts remove pacakges, which isn't really necessary. Removing the packages does save microSD Card space. And if any of the packages start services, then these services will not run, which could save some CPU processing time. This is more valuable on an RPi0 and of little value on an RPi4.
+Some of the scripts remove packages, which isn't necessary. Removing the packages does save microSD Card space. I typically run rPi headless. So, I don't need or use the desktop, chrome and so on. 
 
-Other scripts set up harden the RPi from common security hacks. 
+Removing the packages also prevents any related services from running. A service that is unused and running wastes CPU. This is more valuable on an RPi0 and of little value on an RPi4. But, I do it anyway.
 
-One script adds rpi_monitor.
+Other scripts harden the RPi against common security hacks. 
+
+One script adds rpi monitor, wich is a webserver giving stats on your RPi.
 
 A more detailed description of setting up a Raspberry Pi and the [Raspberry Pi OS is in this link](https://sites.google.com/site/cartwrightraspberrypiprojects/home/steps/setup-raspberry-pi-3-with-raspbian)
 
